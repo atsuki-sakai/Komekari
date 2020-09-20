@@ -12,8 +12,8 @@ target 'KomekariProject' do
   pod"Firebase/Messaging"
   pod"Firebase/Firestore"
   pod"SDWebImage"
-  pod"PKHUD"
-  
+  pod"JGProgressHUD"
+
   target 'KomekariProjectTests' do
     inherit! :search_paths
     # Pods for testing
