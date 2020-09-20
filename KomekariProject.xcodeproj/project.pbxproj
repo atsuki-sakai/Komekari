@@ -24,6 +24,10 @@
 		9B0AFB6A2517A93300B7CA79 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0AFB692517A93300B7CA79 /* NotificationController.swift */; };
 		9B0AFB6F2517A93F00B7CA79 /* CartController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0AFB6E2517A93F00B7CA79 /* CartController.swift */; };
 		9B0AFB742517A94B00B7CA79 /* MyPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0AFB732517A94B00B7CA79 /* MyPageController.swift */; };
+		9B0AFB872517B06500B7CA79 /* AddItemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0AFB862517B06500B7CA79 /* AddItemController.swift */; };
+		9B0AFB8F2517B07600B7CA79 /* ReservationItemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0AFB8E2517B07600B7CA79 /* ReservationItemController.swift */; };
+		9B0AFB942517B0AA00B7CA79 /* PurchaseHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0AFB932517B0AA00B7CA79 /* PurchaseHistory.swift */; };
+		9B0AFB9A2517B0CD00B7CA79 /* MyPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0AFB992517B0CD00B7CA79 /* MyPageController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +71,10 @@
 		9B0AFB692517A93300B7CA79 /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
 		9B0AFB6E2517A93F00B7CA79 /* CartController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartController.swift; sourceTree = "<group>"; };
 		9B0AFB732517A94B00B7CA79 /* MyPageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageController.swift; sourceTree = "<group>"; };
+		9B0AFB862517B06500B7CA79 /* AddItemController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemController.swift; sourceTree = "<group>"; };
+		9B0AFB8E2517B07600B7CA79 /* ReservationItemController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationItemController.swift; sourceTree = "<group>"; };
+		9B0AFB932517B0AA00B7CA79 /* PurchaseHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseHistory.swift; sourceTree = "<group>"; };
+		9B0AFB992517B0CD00B7CA79 /* MyPageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageController.swift; sourceTree = "<group>"; };
 		A1A01C9809E50BDD8F0B595A /* Pods_KomekariProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KomekariProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D55E8BA23C0D910E89D80E72 /* Pods-KomekariProjectTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KomekariProjectTests.debug.xcconfig"; path = "Target Support Files/Pods-KomekariProjectTests/Pods-KomekariProjectTests.debug.xcconfig"; sourceTree = "<group>"; };
 		D7D60420D27E46D02426E6A4 /* Pods-KomekariProject-KomekariProjectUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KomekariProject-KomekariProjectUITests.release.xcconfig"; path = "Target Support Files/Pods-KomekariProject-KomekariProjectUITests/Pods-KomekariProject-KomekariProjectUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -266,6 +274,10 @@
 		9B0AFB842517AEAD00B7CA79 /* BuyerController */ = {
 			isa = PBXGroup;
 			children = (
+				9B0AFB862517B06500B7CA79 /* AddItemController.swift */,
+				9B0AFB8E2517B07600B7CA79 /* ReservationItemController.swift */,
+				9B0AFB932517B0AA00B7CA79 /* PurchaseHistory.swift */,
+				9B0AFB992517B0CD00B7CA79 /* MyPageController.swift */,
 			);
 			path = BuyerController;
 			sourceTree = "<group>";
@@ -521,14 +533,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B0AFB9A2517B0CD00B7CA79 /* MyPageController.swift in Sources */,
 				9B0AFB742517A94B00B7CA79 /* MyPageController.swift in Sources */,
 				9B0AFB6A2517A93300B7CA79 /* NotificationController.swift in Sources */,
 				9B0AFB652517A92700B7CA79 /* FavoriteController.swift in Sources */,
+				9B0AFB942517B0AA00B7CA79 /* PurchaseHistory.swift in Sources */,
 				9B0AFB6F2517A93F00B7CA79 /* CartController.swift in Sources */,
 				9B0AFB602517A90E00B7CA79 /* MainController.swift in Sources */,
 				9B0AFABB2517A51500B7CA79 /* ViewController.swift in Sources */,
+				9B0AFB872517B06500B7CA79 /* AddItemController.swift in Sources */,
 				9B0AFAB72517A51500B7CA79 /* AppDelegate.swift in Sources */,
 				9B0AFAB92517A51500B7CA79 /* SceneDelegate.swift in Sources */,
+				9B0AFB8F2517B07600B7CA79 /* ReservationItemController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
