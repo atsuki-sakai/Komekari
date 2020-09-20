@@ -1,0 +1,6 @@
+framework module Pods_KomekariProject {
+  umbrella header "Pods-KomekariProject-umbrella.h"
+
+  export *
+  module * { export * }
+}
