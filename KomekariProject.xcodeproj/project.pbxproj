@@ -189,11 +189,8 @@
 		9B0AFB482517A8D200B7CA79 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				9B0AFB5F2517A90E00B7CA79 /* MainController.swift */,
-				9B0AFB642517A92700B7CA79 /* FavoriteController.swift */,
-				9B0AFB692517A93300B7CA79 /* NotificationController.swift */,
-				9B0AFB6E2517A93F00B7CA79 /* CartController.swift */,
-				9B0AFB732517A94B00B7CA79 /* MyPageController.swift */,
+				9B0AFB852517AEC300B7CA79 /* SellerController */,
+				9B0AFB842517AEAD00B7CA79 /* BuyerController */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -264,6 +261,25 @@
 			children = (
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		9B0AFB842517AEAD00B7CA79 /* BuyerController */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = BuyerController;
+			sourceTree = "<group>";
+		};
+		9B0AFB852517AEC300B7CA79 /* SellerController */ = {
+			isa = PBXGroup;
+			children = (
+				9B0AFB5F2517A90E00B7CA79 /* MainController.swift */,
+				9B0AFB642517A92700B7CA79 /* FavoriteController.swift */,
+				9B0AFB692517A93300B7CA79 /* NotificationController.swift */,
+				9B0AFB6E2517A93F00B7CA79 /* CartController.swift */,
+				9B0AFB732517A94B00B7CA79 /* MyPageController.swift */,
+			);
+			path = SellerController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

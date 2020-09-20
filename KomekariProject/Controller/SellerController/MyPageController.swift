@@ -9,7 +9,6 @@ import UIKit
 
 class MyPageController: UIViewController {
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
