@@ -11,6 +11,13 @@ class MyPageController: UIViewController {
     
     //MARK: - Properties
     
+    var user: User? {
+        didSet{
+            guard let user = user else { return }
+            
+        }
+    }
+    
     //MARK: - View LifeCycle
     
     override func viewDidLoad() {
@@ -18,14 +25,22 @@ class MyPageController: UIViewController {
         
         configureNavigationBar()
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        configureNavigationBar(Title: "マイページ", prefersLargeTitle: false)
+    }
     
     //MARK: - SetUp UI
     
     fileprivate func configureNavigationBar(){
         
-        configureNavigationBar(Title: "マイページ", prefersLargeTitle: false, titleColor: UIColor.systemGreen)
-        
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "person"), style: .plain, target: self, action: #selector(handleSignOut))
+        
+        if user?.accountType.rawValue == 1 {
+            navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "person"), style: .plain, target: self, action: #selector(handleSignOut))
+        }
+        
     }
     
     //MARK: - Selectors

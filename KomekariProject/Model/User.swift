@@ -14,6 +14,13 @@ enum AccountType: Int {
     case buyer
 }
 
+struct SellerInfo {
+    
+    var sellerName: String!
+    var sellerImage: String!
+    var address: Address!
+}
+
 struct User {
     
     var id: String
@@ -21,6 +28,7 @@ struct User {
     var userName: String!
     var email: String!
     var createdAt: String!
+    var accountType: AccountType!
     var address: Address?
     
     init(uid: String, dictionary: [String: Any]) {
@@ -30,14 +38,16 @@ struct User {
         self.userName = dictionary["userName"] as? String ?? ""
         self.email = dictionary["email"] as? String ?? ""
         self.createdAt = dictionary["createdAt"] as? String ?? ""
+        self.accountType = dictionary["accountType"] as? AccountType ?? AccountType(rawValue: 0)
     }
     
-    init(id: String,userName: String, icon: String?, email: String, createdAt: String) {
+    init(id: String,userName: String, icon: String?, email: String, createdAt: String, accountType: AccountType) {
         
         self.id = id
         self.icon = icon
         self.email = email
         self.userName = userName
+        self.accountType = AccountType(rawValue: accountType.rawValue)
         self.createdAt = createdAt
     }
 }

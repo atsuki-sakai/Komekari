@@ -27,6 +27,8 @@
 		9B0AFBA42517B13300B7CA79 /* Richabillity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0AFBA32517B13300B7CA79 /* Richabillity.swift */; };
 		9B0AFBA92517B13B00B7CA79 /* CustomError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0AFBA82517B13B00B7CA79 /* CustomError.swift */; };
 		9B0AFBAE2517B14000B7CA79 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0AFBAD2517B14000B7CA79 /* Constants.swift */; };
+		9B30691F2518BD760080BB49 /* AddItemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B30691E2518BD760080BB49 /* AddItemController.swift */; };
+		9B3069252518CE510080BB49 /* ItemCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3069242518CE510080BB49 /* ItemCollectionCell.swift */; };
 		9B7DD1A62517B34D009EB496 /* MyPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7DD1A52517B34D009EB496 /* MyPageController.swift */; };
 		9B7DD1AD2517B3CD009EB496 /* SignInController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7DD1AB2517B3CD009EB496 /* SignInController.swift */; };
 		9B7DD1AE2517B3CD009EB496 /* SignUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7DD1AC2517B3CD009EB496 /* SignUpController.swift */; };
@@ -85,6 +87,8 @@
 		9B0AFBA32517B13300B7CA79 /* Richabillity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Richabillity.swift; sourceTree = "<group>"; };
 		9B0AFBA82517B13B00B7CA79 /* CustomError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomError.swift; sourceTree = "<group>"; };
 		9B0AFBAD2517B14000B7CA79 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		9B30691E2518BD760080BB49 /* AddItemController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemController.swift; sourceTree = "<group>"; };
+		9B3069242518CE510080BB49 /* ItemCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCollectionCell.swift; sourceTree = "<group>"; };
 		9B7DD1A52517B34D009EB496 /* MyPageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageController.swift; sourceTree = "<group>"; };
 		9B7DD1AB2517B3CD009EB496 /* SignInController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInController.swift; sourceTree = "<group>"; };
 		9B7DD1AC2517B3CD009EB496 /* SignUpController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpController.swift; sourceTree = "<group>"; };
@@ -225,6 +229,7 @@
 				9B0AFB6E2517A93F00B7CA79 /* CartController.swift */,
 				9B7DD1A52517B34D009EB496 /* MyPageController.swift */,
 				9B7DD1AA2517B3AB009EB496 /* AuthController */,
+				9B30691E2518BD760080BB49 /* AddItemController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -239,6 +244,7 @@
 				9B0AFB7D2517AAE500B7CA79 /* NotificationViews */,
 				9B0AFB7C2517AAC800B7CA79 /* CartViews */,
 				9B0AFB7B2517AABF00B7CA79 /* MyPageViews */,
+				9B3069232518CE2C0080BB49 /* AddItemView */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -308,6 +314,14 @@
 				9B0AFBAD2517B14000B7CA79 /* Constants.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		9B3069232518CE2C0080BB49 /* AddItemView */ = {
+			isa = PBXGroup;
+			children = (
+				9B3069242518CE510080BB49 /* ItemCollectionCell.swift */,
+			);
+			path = AddItemView;
 			sourceTree = "<group>";
 		};
 		9B7DD1AA2517B3AB009EB496 /* AuthController */ = {
@@ -560,10 +574,12 @@
 			files = (
 				9B0AFB6A2517A93300B7CA79 /* NotificationController.swift in Sources */,
 				9B0AFB652517A92700B7CA79 /* FavoriteController.swift in Sources */,
+				9B3069252518CE510080BB49 /* ItemCollectionCell.swift in Sources */,
 				9B7DD1CD2517B488009EB496 /* Cart.swift in Sources */,
 				9B7DD1B42517B3E9009EB496 /* AuthService.swift in Sources */,
 				9B0AFBA92517B13B00B7CA79 /* CustomError.swift in Sources */,
 				9B0AFB6F2517A93F00B7CA79 /* CartController.swift in Sources */,
+				9B30691F2518BD760080BB49 /* AddItemController.swift in Sources */,
 				9B7DD1CB2517B485009EB496 /* Address.swift in Sources */,
 				9B7DD1C62517B480009EB496 /* Item.swift in Sources */,
 				9B0AFBAE2517B14000B7CA79 /* Constants.swift in Sources */,

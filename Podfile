@@ -13,6 +13,8 @@ target 'KomekariProject' do
   pod"Firebase/Firestore"
   pod"SDWebImage"
   pod"JGProgressHUD"
+  pod"Gallery"
+  pod"Stripe"
 
   target 'KomekariProjectTests' do
     inherit! :search_paths

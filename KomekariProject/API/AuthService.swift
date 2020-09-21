@@ -39,6 +39,31 @@ class AuthService {
         }
     }
     
+    func resetPassword(email: String, completion: @escaping(_ error: Error?) -> Void) {
+        
+        Auth.auth().sendPasswordReset(withEmail: email) { (error) in
+            
+            if let error = error {
+                completion(error)
+            }
+        }
+    }
+    
+    func resendValificationEmail(email: String, completion: @escaping(Error?) -> Void) {
+        
+        Auth.auth().currentUser?.reload(completion: { (error) in
+            if let error = error {
+                completion(error)
+            }
+            Auth.auth().currentUser?.sendEmailVerification(completion: { (error) in
+                if let error = error {
+                    completion(error)
+                }
+                completion(nil)
+            })
+        })
+    }
+    
     func signOut(completion: @escaping(Error?) -> Void) {
         
         do{
@@ -88,7 +113,8 @@ class AuthService {
             "email": user.email as String,
             "userName": user.userName as String,
             "icon": user.icon as Any,
-            "createdAt": user.createdAt as String
+            "createdAt": user.createdAt as String,
+            "accountType": user.accountType.rawValue as Int
         ] as [String: Any]
         KUSER_DB_REF.child(user.id).updateChildValues(values) { (error, ref) in
             if let error = error {

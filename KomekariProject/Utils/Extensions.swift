@@ -164,7 +164,7 @@ extension UIViewController {
         inView.layer.insertSublayer(gradientLayer, at: 0)
     }
     
-    func configureNavigationBar(Title: String, prefersLargeTitle: Bool, bgColor: UIColor = .white, titleColor: UIColor, tintColor: UIColor = .systemBlue) {
+    func configureNavigationBar(Title: String, prefersLargeTitle: Bool, bgColor: UIColor = .white, titleColor: UIColor = #colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1), tintColor: UIColor = .systemBlue) {
         
         let apperarance = UINavigationBarAppearance() // Appearance: NavigationBarの外観を変更するオブジェクト
         

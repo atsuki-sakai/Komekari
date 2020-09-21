@@ -17,6 +17,11 @@ class CartController: UIViewController {
         super.viewDidLoad()
         
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        configureNavigationBar(Title: "カート", prefersLargeTitle: false)
+    }
     
     //MARK: - SetUp UI
     

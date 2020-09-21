@@ -18,6 +18,12 @@ class FavoriteController: UIViewController {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        configureNavigationBar(Title: "お気に入り", prefersLargeTitle: false)
+    }
+    
     //MARK: - SetUp UI
     
     //MARK: - Helpers

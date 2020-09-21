@@ -19,6 +19,11 @@ class MainController: UIViewController {
         checkFormStates()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        configureNavigationBar(Title: "KOMEKARI", prefersLargeTitle: false)
+    }
     //MARK: - SetUp UI
     
     //MARK: - Helpers

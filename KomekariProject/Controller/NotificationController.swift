@@ -17,6 +17,11 @@ class NotificationController: UIViewController {
         super.viewDidLoad()
         
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        configureNavigationBar(Title: "メッセージ", prefersLargeTitle: false)
+    }
     
     //MARK: - SetUp UI
     

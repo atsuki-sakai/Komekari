@@ -38,7 +38,7 @@ class SignUpController: UIViewController {
         return label
     }()
     // **UIButtonなので注意
-    private let imageView: UIButton = {
+    private let addImageButton: UIButton = {
         
         let iv = UIButton(type: .system)
         iv.setImage(#imageLiteral(resourceName: "camera").withRenderingMode(.alwaysOriginal), for: .normal)
@@ -47,12 +47,12 @@ class SignUpController: UIViewController {
         iv.clipsToBounds = true
         return iv
     }()
-    private lazy var imageViewHeight: CGFloat = self.imageView.frame.height
+    private lazy var imageViewHeight: CGFloat = self.addImageButton.frame.height
     
     private let userNameInputView: InputContainerView = {
         
         let tf = CustomTextField(placeHolder: "UserName", type: .twitter)
-        tf.addTarget(self, action: #selector(formCheck), for: .editingChanged)
+        tf.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
         let image = UIImage(systemName: "person.fill")
         let view = InputContainerView(image: image!, textField: tf)
         return view
@@ -62,7 +62,7 @@ class SignUpController: UIViewController {
         
         let image = UIImage(systemName: "envelope.fill")
         let tf = CustomTextField(placeHolder: "Sample@emal.com", type: .emailAddress)
-        tf.addTarget(self, action: #selector(formCheck), for: .editingChanged)
+        tf.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
         let view = InputContainerView(image: image!, textField: tf)
         
         return view
@@ -73,10 +73,21 @@ class SignUpController: UIViewController {
         let image = UIImage(systemName: "lock.fill")
         let tf = CustomTextField(placeHolder: "Password", type: .emailAddress)
         tf.isSecureTextEntry = true
-        tf.addTarget(self, action: #selector(formCheck), for: .editingChanged)
+        tf.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
         let view = InputContainerView(image: image!, textField: tf)
         
         return view
+    }()
+    
+    private let userTypeSegment: UISegmentedControl = {
+        
+        let items = ["購入する", "出品する"]
+        let seg = UISegmentedControl(items: items)
+        seg.selectedSegmentIndex = 0
+        seg.selectedSegmentTintColor = .systemGreen
+        seg.backgroundColor = .white
+        seg.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 22)], for: .normal)
+        return seg
     }()
     
     private let signUpButton: UIButton = {
@@ -119,11 +130,10 @@ class SignUpController: UIViewController {
     }
     //MARK: - Selectors
     
-    @objc func formCheck(sender: UITextField) {
+    @objc func textDidChange(sender: UITextField) {
         
         UIView.animate(withDuration: 0.4) {
-            self.changeUnderLineColor(sender: sender)
-            self.changeColorSignInButton()
+            self.changeStateOnInput(sender: sender)
         }
     }
     
@@ -177,20 +187,20 @@ class SignUpController: UIViewController {
     
     fileprivate func configureImageView() {
         
-        view.addSubview(imageView)
-        imageView.anchor(top: titleLabel.bottomAnchor, paddingTop: 32, height: 130, width: 130)
-        imageView.centerX(inView: view)
+        view.addSubview(addImageButton)
+        addImageButton.anchor(top: titleLabel.bottomAnchor, paddingTop: 32, height: 130, width: 130)
+        addImageButton.centerX(inView: view)
     }
     
     fileprivate func configureInputView() {
      
-        let stack = UIStackView(arrangedSubviews: [userNameInputView, emailInputView, passwordInputView])
+        let stack = UIStackView(arrangedSubviews: [userNameInputView, emailInputView, passwordInputView, userTypeSegment])
         view.addSubview(stack)
         
         stack.axis = .vertical
         stack.spacing = 12
         stack.distribution = .fillEqually
-        stack.anchor(top: imageView.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 22, padddingLeft: 22, paddingRight: -22)
+        stack.anchor(top: addImageButton.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 22, padddingLeft: 22, paddingRight: -22)
         stack.centerX(inView: view)
         
         view.addSubview(signUpButton)
@@ -205,10 +215,10 @@ class SignUpController: UIViewController {
         alreadyAccountButton.centerX(inView: view)
     }
     
-    fileprivate func changeUnderLineColor(sender: UITextField) {
+    fileprivate func changeStateOnInput(sender: UITextField) {
         
+        changeSignInButtonState()
         if sender == emailInputView.tf {
-                   
             if sender.text!.count > 0 {
                self.emailInputView.underLine.backgroundColor = .systemBlue
             }else{
@@ -221,7 +231,6 @@ class SignUpController: UIViewController {
                self.passwordInputView.underLine.backgroundColor = .darkGray
             }
         }else if sender == userNameInputView.tf {
-            
             if sender.text!.count > 0 {
                 self.userNameInputView.underLine.backgroundColor = .systemBlue
             }else{
@@ -230,10 +239,11 @@ class SignUpController: UIViewController {
         }
     }
     
-    fileprivate func changeColorSignInButton() {
+    fileprivate func changeSignInButtonState() {
         
-        if emailInputView.tf.text!.count > 0 && passwordInputView.tf.text!.count > 6 && !userNameInputView.tf.text!.isEmpty {
-            
+        let buttonEnable: Bool = emailInputView.tf.text!.count > 0 && passwordInputView.tf.text!.count > 6 && !userNameInputView.tf.text!.isEmpty
+        
+        if buttonEnable {
             signUpButton.backgroundColor = #colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1)
             signUpButton.isEnabled = true
             signUpButton.setTitle("登録", for: .normal)
@@ -283,7 +293,8 @@ class SignUpController: UIViewController {
                     self.errorAlert(message: error.localizedDescription)
                     return
                 }
-                let user = User(id: uid, userName: userName, icon: url, email: credential.email, createdAt: getCurrentTime())
+                let accountTypeIndex = self.userTypeSegment.selectedSegmentIndex
+                let user = User(id: uid, userName: userName, icon: url, email: credential.email, createdAt: getCurrentTime(), accountType: AccountType(rawValue: accountTypeIndex)!)
                 AuthService.shared.saveUser(user: user) { (error) in
                     
                     if let error = error {
@@ -292,8 +303,8 @@ class SignUpController: UIViewController {
                         self.errorAlert(message: error.localizedDescription)
                         return
                     }
+                    self.showloader(false)
                     self.messageAlert(title: "登録完了", message: "送られてきたメールを確認してください。") { (_) in
-                        self.showloader(false)
                         self.signUpButton.isEnabled = true
                         self.delegate?.sendUserCredential(credential: credential)
                         self.dismiss(animated: true, completion: nil)
@@ -325,10 +336,10 @@ extension SignUpController: UIImagePickerControllerDelegate, UINavigationControl
         
         guard let image = info[.originalImage] as? UIImage else { return }
         userImage = image
-        imageView.setImage(image.withRenderingMode(.alwaysOriginal), for: .normal)
-        imageView.layer.cornerRadius = 120/2
-        imageView.layer.borderColor = UIColor.black.cgColor
-        imageView.layer.borderWidth = 1.2
+        addImageButton.setImage(image.withRenderingMode(.alwaysOriginal), for: .normal)
+        addImageButton.layer.cornerRadius = 120/2
+        addImageButton.layer.borderColor = UIColor.black.cgColor
+        addImageButton.layer.borderWidth = 1.2
         
         picker.dismiss(animated: true, completion: nil)
     }

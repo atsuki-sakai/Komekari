@@ -87,13 +87,33 @@ class SignInController: UIViewController {
         return button
     }()
     
+    private let resentEmailButton: UIButton = {
+        
+        let button = UIButton(type: .system)
+        let atributeString = NSMutableAttributedString(string: "メールが届きませんか？", attributes: [NSAttributedString.Key.foregroundColor: UIColor.black, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16)])
+        atributeString.append(NSAttributedString(string: " 再送信する", attributes: [NSAttributedString.Key.foregroundColor: UIColor.systemBlue, NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 18)]))
+        button.setAttributedTitle(atributeString, for: .normal)
+        button.addTarget(self, action: #selector(handleResendEmail), for: .touchUpInside)
+        return button
+    }()
+    
+    private let resetPasswordButton: UIButton = {
+        
+        let button = UIButton(type: .system)
+        button.setAttributedTitle(NSAttributedString(string: "パスワードをお忘れですか？", attributes: [.foregroundColor: UIColor.systemRed, .font: UIFont.boldSystemFont(ofSize: 16)]), for: .normal)
+        button.addTarget(self, action: #selector(handleResetPassword), for: .touchUpInside)
+        button.alpha = 0
+        button.backgroundColor = .white
+        button.layer.cornerRadius = 4
+        return button
+    }()
+    
     //MARK: - View LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureUI()
     }
-    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         view.endEditing(true)
@@ -133,6 +153,7 @@ class SignInController: UIViewController {
                 self.showloader(false)
                 self.errorAlert(message: error.localizedDescription)
             }
+            self.resetPasswordButton.removeFromSuperview()
             self.signInButton.isEnabled = true
             self.showloader(false)
             guard let controller = mainNavigationController?.viewControllers.first as? MainController else { return }
@@ -155,6 +176,36 @@ class SignInController: UIViewController {
         }
     }
     
+    @objc func handleResetPassword() {
+        guard let email = emailInputView.tf.text else { return }
+        AuthService.shared.resetPassword(email: email) { (error) in
+            
+            if let error = error {
+                self.messageAlert(title: "リセットパスワード　エラー", message: error.localizedDescription, completion: nil)
+                return
+            }
+        }
+        self.messageAlert(title: "メールを送信しました。", message: "送られてきたメールからパスワードを再設定してください。") { (_) in
+            self.passwordInputView.tf.text = ""
+        }
+    }
+    
+    @objc func handleResendEmail() {
+       
+        guard let email = emailInputView.tf.text else { return }
+        
+        AuthService.shared.resendValificationEmail(email: email) { (error) in
+            
+            if let error = error {
+                self.messageAlert(title: "メールの送信に失敗", message: error.localizedDescription, completion: nil)
+                return
+            }
+            self.messageAlert(title: "メールを送信しました。", message:  "送られてきたメールを確認してください。") { (_) in
+                self.emailInputView.tf.text = ""
+            }
+        }
+    }
+    
     //MARK: - Helpers
     
     func configureUI() {
@@ -165,6 +216,13 @@ class SignInController: UIViewController {
         configureInputView()
         configureAlreadyButton()
         setUpNotification()
+    }
+    
+    fileprivate func setUpresentEmailButton() {
+        
+        view.addSubview(resentEmailButton)
+        resentEmailButton.anchor(top: resetPasswordButton.bottomAnchor, paddingTop: 16)
+        resentEmailButton.centerX(inView: self.view)
     }
     
     fileprivate func configureTitleLabel() {
@@ -195,6 +253,9 @@ class SignInController: UIViewController {
         view.addSubview(signInButton)
         signInButton.anchor(top: stack.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 24, padddingLeft: 16, paddingRight: -16, height: 50)
         
+        view.addSubview(resetPasswordButton)
+        resetPasswordButton.anchor(top: signInButton.bottomAnchor, paddingTop: 32)
+        resetPasswordButton.centerX(inView: view)
     }
     
     fileprivate func configureAlreadyButton() {
@@ -208,10 +269,12 @@ class SignInController: UIViewController {
         
         if sender == emailInputView.tf {
                    
-            if sender.text!.count > 0 {
-               self.emailInputView.underLine.backgroundColor = .systemBlue
+            if sender.text!.count > 6 {
+                self.emailInputView.underLine.backgroundColor = .systemBlue
+                self.resetPasswordButton.alpha = 1
             }else{
-               self.emailInputView.underLine.backgroundColor = .darkGray
+                self.emailInputView.underLine.backgroundColor = .darkGray
+                self.resetPasswordButton.alpha = 0
             }
         }else if sender == passwordInputView.tf {
             if sender.text!.count > 6 {
@@ -254,6 +317,7 @@ extension SignInController: SignUpControllerDelegate {
         passwordInputView.underLine.backgroundColor = .systemBlue
         signInButton.backgroundColor = .systemGreen
         signInButton.isEnabled = true
+        setUpresentEmailButton()
     }
 }
 

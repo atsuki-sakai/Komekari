@@ -8,30 +8,27 @@
 
 import Foundation
 
+
 class Item {
     
     var price: Double!
     var inStock: Int!
     var itemName: String!
-    var sellerName: String!
-    var sellerImage: String!
-    var address: Address!
     var images: [String]!
     var description: String!
+    var sellerInfo: SellerInfo?
     
     //買われた時のみ生成
     var buyerId: String?
     
-    init(price: Double, inStock: Int, itemName: String, sellerName: String, sellerImage: String, address: Address, images: [String], description: String) {
+    init(price: Double, inStock: Int, itemName: String, images: [String], description: String, sellerInfo: SellerInfo? = nil) {
         
         self.price = price
         self.inStock = inStock
         self.itemName = itemName
-        self.sellerName = sellerName
-        self.sellerImage = sellerImage
-        self.address = address
         self.images = images
         self.description = description
+        self.sellerInfo = sellerInfo
     }
     
 }
