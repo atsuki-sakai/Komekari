@@ -14,6 +14,7 @@ class MyPageController: UIViewController {
     var user: User? {
         didSet{
             guard let user = user else { return }
+            print("MyPage User =>", user)
             
         }
     }
@@ -35,15 +36,17 @@ class MyPageController: UIViewController {
     
     fileprivate func configureNavigationBar(){
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "person"), style: .plain, target: self, action: #selector(handleSignOut))
-        
-        if user?.accountType.rawValue == 1 {
-            navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "person"), style: .plain, target: self, action: #selector(handleSignOut))
-        }
-        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "person"), style: .plain, target: self, action: #selector(handleSignOut))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(handleAddItemController))
     }
     
     //MARK: - Selectors
+    
+    @objc func handleAddItemController() {
+        
+        let controller = UINavigationController(rootViewController: AddItemController())
+        present(controller, animated: true, completion: nil)
+    }
     
     @objc func handleSignOut() {
         
@@ -53,10 +56,17 @@ class MyPageController: UIViewController {
                 self.errorAlert(message: error.localizedDescription)
                 return
             }
-            let controller = SignInController()
-            controller.configureUI()
-            controller.modalPresentationStyle = .fullScreen
-            self.present(controller, animated: true, completion: nil)
+            let alert = UIAlertController(title: "ログアウトしますか？", message: nil, preferredStyle: .actionSheet)
+            let ok = UIAlertAction(title: "ログアウト", style: .default) { (_) in
+                let controller = SignInController()
+                controller.configureUI()
+                controller.modalPresentationStyle = .fullScreen
+                self.present(controller, animated: true, completion: nil)
+            }
+            let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            alert.addAction(ok)
+            alert.addAction(cancel)
+            self.present(alert, animated: true, completion: nil)
         }
     }
     

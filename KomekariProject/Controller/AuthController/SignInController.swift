@@ -138,27 +138,25 @@ class SignInController: UIViewController {
     
     @objc func handleSignIn() {
         
-        self.showloader(true)
-        self.signInButton.isEnabled = false
-        if !Reachabilty.HasConnection() {
-            self.messageAlert(title: "通信エラー", message: "通信状況を確認してください。", completion: nil)
-            self.signInButton.isEnabled = true
-            self.showloader(false)
-        }
-        let credential = AuthCredential(email: emailInputView.tf.text!, password: passwordInputView.tf.text!)
-        AuthService.shared.login(credential: credential) { (error) in
+        checkHasConnection()
+        changeButtonStates(enable: false)
+        
+        guard let email = emailInputView.tf.text else { return }
+        guard let pass = passwordInputView.tf.text else { return }
+        
+        AuthService.shared.login(email: email, pass: pass) { (error) in
             
             if let error = error {
-                self.signInButton.isEnabled = true
-                self.showloader(false)
+                self.changeButtonStates(enable: true)
                 self.errorAlert(message: error.localizedDescription)
+                return
             }
             self.resetPasswordButton.removeFromSuperview()
-            self.signInButton.isEnabled = true
-            self.showloader(false)
+            self.changeButtonStates(enable: true)
             guard let controller = mainNavigationController?.viewControllers.first as? MainController else { return }
             controller.checkFormStates()
             self.dismiss(animated: true, completion: nil)
+            
         }
     }
     
@@ -304,20 +302,33 @@ class SignInController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
-   
+    
+    fileprivate func changeButtonStates(enable: Bool) {
+        
+        if enable {
+            self.showloader(false)
+            self.signInButton.isEnabled = true
+        }else{
+            self.showloader(true)
+            self.signInButton.isEnabled = false
+        }
+    }
 }
 
 extension SignInController: SignUpControllerDelegate {
-    
-    func sendUserCredential(credential: AuthCredential) {
+    func sendUserCredential(email: String, pass: String) {
         
-        emailInputView.tf.text = credential.email
-        passwordInputView.tf.text = credential.password
+        emailInputView.tf.text = email
+        passwordInputView.tf.text = pass
         emailInputView.underLine.backgroundColor = .systemBlue
         passwordInputView.underLine.backgroundColor = .systemBlue
         signInButton.backgroundColor = .systemGreen
+        signInButton.setTitle("ログイン", for: .normal)
         signInButton.isEnabled = true
         setUpresentEmailButton()
     }
+    
+    
+    
 }
 

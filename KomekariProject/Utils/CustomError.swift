@@ -12,6 +12,8 @@ enum CustomError: Error {
     
     case logOut
     case emailValid
+    case notConnection
+    case upLoadError
 }
 
 extension CustomError: LocalizedError {
@@ -23,6 +25,10 @@ extension CustomError: LocalizedError {
             return "ログアウト時にエラーが発生しました。"
         case .emailValid:
             return "メールを確認し、認証を完了してください。"
+        case .notConnection:
+            return "通信状況を確認してください"
+        case .upLoadError:
+            return "storage upload Error"
         }
     }
 }

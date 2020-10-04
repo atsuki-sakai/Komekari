@@ -10,6 +10,8 @@
 		13E7A1652009713E13B2C242 /* Pods_KomekariProjectTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4583CBFF2C1CF73F11745F9 /* Pods_KomekariProjectTests.framework */; };
 		7C28C9AB3FFF8AB201AFAA7C /* Pods_KomekariProject_KomekariProjectUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64FE2F18773C732CD012C672 /* Pods_KomekariProject_KomekariProjectUITests.framework */; };
 		96E669EE8370E56FBF39CB66 /* Pods_KomekariProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1A01C9809E50BDD8F0B595A /* Pods_KomekariProject.framework */; };
+		9B0999EF251B8EAB001E39F5 /* FirebaseCollectionReference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0999EE251B8EAB001E39F5 /* FirebaseCollectionReference.swift */; };
+		9B0999F4251B93DE001E39F5 /* SellerInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0999F3251B93DE001E39F5 /* SellerInfo.swift */; };
 		9B0AFAB72517A51500B7CA79 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0AFAB62517A51500B7CA79 /* AppDelegate.swift */; };
 		9B0AFAB92517A51500B7CA79 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0AFAB82517A51500B7CA79 /* SceneDelegate.swift */; };
 		9B0AFABB2517A51500B7CA79 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0AFABA2517A51500B7CA79 /* ViewController.swift */; };
@@ -29,6 +31,7 @@
 		9B0AFBAE2517B14000B7CA79 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0AFBAD2517B14000B7CA79 /* Constants.swift */; };
 		9B30691F2518BD760080BB49 /* AddItemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B30691E2518BD760080BB49 /* AddItemController.swift */; };
 		9B3069252518CE510080BB49 /* ItemCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3069242518CE510080BB49 /* ItemCollectionCell.swift */; };
+		9B382025252A1D8700B1AA1D /* FavoriteTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B382024252A1D8700B1AA1D /* FavoriteTableCell.swift */; };
 		9B7DD1A62517B34D009EB496 /* MyPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7DD1A52517B34D009EB496 /* MyPageController.swift */; };
 		9B7DD1AD2517B3CD009EB496 /* SignInController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7DD1AB2517B3CD009EB496 /* SignInController.swift */; };
 		9B7DD1AE2517B3CD009EB496 /* SignUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7DD1AC2517B3CD009EB496 /* SignUpController.swift */; };
@@ -41,6 +44,12 @@
 		9B7DD1CB2517B485009EB496 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7DD1CA2517B485009EB496 /* Address.swift */; };
 		9B7DD1CD2517B488009EB496 /* Cart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7DD1CC2517B488009EB496 /* Cart.swift */; };
 		9B7DD1D22517B48C009EB496 /* PurchaseHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7DD1D12517B48C009EB496 /* PurchaseHistory.swift */; };
+		9BB4BC17251DBB6200CC50E2 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB4BC16251DBB6200CC50E2 /* ImageLoader.swift */; };
+		9BB4BC1C251DDDEB00CC50E2 /* AddressInputController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB4BC1B251DDDEB00CC50E2 /* AddressInputController.swift */; };
+		9BC5B498252700D4002CBAD0 /* MainTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC5B497252700D4002CBAD0 /* MainTableCell.swift */; };
+		9BC5B49D252721F3002CBAD0 /* Prefectures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC5B49C252721F3002CBAD0 /* Prefectures.swift */; };
+		9BC5B4A2252726A5002CBAD0 /* CoolingTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC5B4A1252726A5002CBAD0 /* CoolingTimer.swift */; };
+		9BC5B4A7252786F3002CBAD0 /* ItemDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC5B4A6252786F2002CBAD0 /* ItemDetailController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +73,8 @@
 		62FBE566243E7E796A8BE96E /* Pods-KomekariProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KomekariProject.debug.xcconfig"; path = "Target Support Files/Pods-KomekariProject/Pods-KomekariProject.debug.xcconfig"; sourceTree = "<group>"; };
 		64FE2F18773C732CD012C672 /* Pods_KomekariProject_KomekariProjectUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KomekariProject_KomekariProjectUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6CF9D52244817D9EE38B0E79 /* Pods-KomekariProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KomekariProject.release.xcconfig"; path = "Target Support Files/Pods-KomekariProject/Pods-KomekariProject.release.xcconfig"; sourceTree = "<group>"; };
+		9B0999EE251B8EAB001E39F5 /* FirebaseCollectionReference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseCollectionReference.swift; sourceTree = "<group>"; };
+		9B0999F3251B93DE001E39F5 /* SellerInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SellerInfo.swift; sourceTree = "<group>"; };
 		9B0AFAB32517A51500B7CA79 /* KomekariProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KomekariProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B0AFAB62517A51500B7CA79 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9B0AFAB82517A51500B7CA79 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -89,6 +100,7 @@
 		9B0AFBAD2517B14000B7CA79 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		9B30691E2518BD760080BB49 /* AddItemController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemController.swift; sourceTree = "<group>"; };
 		9B3069242518CE510080BB49 /* ItemCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCollectionCell.swift; sourceTree = "<group>"; };
+		9B382024252A1D8700B1AA1D /* FavoriteTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteTableCell.swift; sourceTree = "<group>"; };
 		9B7DD1A52517B34D009EB496 /* MyPageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageController.swift; sourceTree = "<group>"; };
 		9B7DD1AB2517B3CD009EB496 /* SignInController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInController.swift; sourceTree = "<group>"; };
 		9B7DD1AC2517B3CD009EB496 /* SignUpController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpController.swift; sourceTree = "<group>"; };
@@ -101,6 +113,12 @@
 		9B7DD1CA2517B485009EB496 /* Address.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
 		9B7DD1CC2517B488009EB496 /* Cart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cart.swift; sourceTree = "<group>"; };
 		9B7DD1D12517B48C009EB496 /* PurchaseHistory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PurchaseHistory.swift; sourceTree = "<group>"; };
+		9BB4BC16251DBB6200CC50E2 /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
+		9BB4BC1B251DDDEB00CC50E2 /* AddressInputController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressInputController.swift; sourceTree = "<group>"; };
+		9BC5B497252700D4002CBAD0 /* MainTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableCell.swift; sourceTree = "<group>"; };
+		9BC5B49C252721F3002CBAD0 /* Prefectures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Prefectures.swift; sourceTree = "<group>"; };
+		9BC5B4A1252726A5002CBAD0 /* CoolingTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoolingTimer.swift; sourceTree = "<group>"; };
+		9BC5B4A6252786F2002CBAD0 /* ItemDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetailController.swift; sourceTree = "<group>"; };
 		A1A01C9809E50BDD8F0B595A /* Pods_KomekariProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KomekariProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D55E8BA23C0D910E89D80E72 /* Pods-KomekariProjectTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KomekariProjectTests.debug.xcconfig"; path = "Target Support Files/Pods-KomekariProjectTests/Pods-KomekariProjectTests.debug.xcconfig"; sourceTree = "<group>"; };
 		D7D60420D27E46D02426E6A4 /* Pods-KomekariProject-KomekariProjectUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KomekariProject-KomekariProjectUITests.release.xcconfig"; path = "Target Support Files/Pods-KomekariProject-KomekariProjectUITests/Pods-KomekariProject-KomekariProjectUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -230,6 +248,8 @@
 				9B7DD1A52517B34D009EB496 /* MyPageController.swift */,
 				9B7DD1AA2517B3AB009EB496 /* AuthController */,
 				9B30691E2518BD760080BB49 /* AddItemController.swift */,
+				9BB4BC1B251DDDEB00CC50E2 /* AddressInputController.swift */,
+				9BC5B4A6252786F2002CBAD0 /* ItemDetailController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -257,6 +277,8 @@
 				9B7DD1CA2517B485009EB496 /* Address.swift */,
 				9B7DD1CC2517B488009EB496 /* Cart.swift */,
 				9B7DD1D12517B48C009EB496 /* PurchaseHistory.swift */,
+				9B0999F3251B93DE001E39F5 /* SellerInfo.swift */,
+				9BC5B49C252721F3002CBAD0 /* Prefectures.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -264,6 +286,7 @@
 		9B0AFB7A2517AAAE00B7CA79 /* MainViews */ = {
 			isa = PBXGroup;
 			children = (
+				9BC5B497252700D4002CBAD0 /* MainTableCell.swift */,
 			);
 			path = MainViews;
 			sourceTree = "<group>";
@@ -292,6 +315,7 @@
 		9B0AFB7E2517AAEF00B7CA79 /* FavoriteViews */ = {
 			isa = PBXGroup;
 			children = (
+				9B382024252A1D8700B1AA1D /* FavoriteTableCell.swift */,
 			);
 			path = FavoriteViews;
 			sourceTree = "<group>";
@@ -301,6 +325,7 @@
 			children = (
 				9B7DD1B22517B3E9009EB496 /* AuthService.swift */,
 				9B7DD1B32517B3E9009EB496 /* FireAPI.swift */,
+				9BB4BC16251DBB6200CC50E2 /* ImageLoader.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -312,6 +337,8 @@
 				9B0AFBA32517B13300B7CA79 /* Richabillity.swift */,
 				9B0AFBA82517B13B00B7CA79 /* CustomError.swift */,
 				9B0AFBAD2517B14000B7CA79 /* Constants.swift */,
+				9B0999EE251B8EAB001E39F5 /* FirebaseCollectionReference.swift */,
+				9BC5B4A1252726A5002CBAD0 /* CoolingTimer.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -573,7 +600,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				9B0AFB6A2517A93300B7CA79 /* NotificationController.swift in Sources */,
+				9BC5B49D252721F3002CBAD0 /* Prefectures.swift in Sources */,
 				9B0AFB652517A92700B7CA79 /* FavoriteController.swift in Sources */,
+				9BC5B4A7252786F3002CBAD0 /* ItemDetailController.swift in Sources */,
+				9BB4BC1C251DDDEB00CC50E2 /* AddressInputController.swift in Sources */,
 				9B3069252518CE510080BB49 /* ItemCollectionCell.swift in Sources */,
 				9B7DD1CD2517B488009EB496 /* Cart.swift in Sources */,
 				9B7DD1B42517B3E9009EB496 /* AuthService.swift in Sources */,
@@ -581,10 +611,14 @@
 				9B0AFB6F2517A93F00B7CA79 /* CartController.swift in Sources */,
 				9B30691F2518BD760080BB49 /* AddItemController.swift in Sources */,
 				9B7DD1CB2517B485009EB496 /* Address.swift in Sources */,
+				9B382025252A1D8700B1AA1D /* FavoriteTableCell.swift in Sources */,
 				9B7DD1C62517B480009EB496 /* Item.swift in Sources */,
+				9B0999EF251B8EAB001E39F5 /* FirebaseCollectionReference.swift in Sources */,
 				9B0AFBAE2517B14000B7CA79 /* Constants.swift in Sources */,
 				9B0AFB602517A90E00B7CA79 /* MainController.swift in Sources */,
 				9B0AFABB2517A51500B7CA79 /* ViewController.swift in Sources */,
+				9BC5B498252700D4002CBAD0 /* MainTableCell.swift in Sources */,
+				9BB4BC17251DBB6200CC50E2 /* ImageLoader.swift in Sources */,
 				9B7DD1BB2517B400009EB496 /* InputContainerView.swift in Sources */,
 				9B7DD1C12517B478009EB496 /* User.swift in Sources */,
 				9B0AFB9F2517B12800B7CA79 /* Extensions.swift in Sources */,
@@ -592,6 +626,8 @@
 				9B7DD1AE2517B3CD009EB496 /* SignUpController.swift in Sources */,
 				9B7DD1A62517B34D009EB496 /* MyPageController.swift in Sources */,
 				9B7DD1BC2517B400009EB496 /* CustomTextField.swift in Sources */,
+				9BC5B4A2252726A5002CBAD0 /* CoolingTimer.swift in Sources */,
+				9B0999F4251B93DE001E39F5 /* SellerInfo.swift in Sources */,
 				9B0AFAB72517A51500B7CA79 /* AppDelegate.swift in Sources */,
 				9B7DD1D22517B48C009EB496 /* PurchaseHistory.swift in Sources */,
 				9B0AFBA42517B13300B7CA79 /* Richabillity.swift in Sources */,

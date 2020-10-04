@@ -130,6 +130,14 @@ extension UIViewController {
         
     }
     
+    func checkHasConnection() {
+        if !Reachabilty.HasConnection(){
+            let error = CustomError.notConnection
+            self.messageAlert(title: "通信エラー", message: error.localizedDescription, completion: nil)
+            return
+        }
+    }
+    
     func errorAlert(message: String, title: String = "Error") {
     
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
@@ -201,7 +209,6 @@ extension UIImage {
 
 
 //MARK: - Public Functions
-
 
 func getCurrentTime() -> String {
     

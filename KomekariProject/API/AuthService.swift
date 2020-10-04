@@ -7,22 +7,19 @@
 //
 
 import FirebaseAuth
-import FirebaseDatabase
-import UIKit
-
-struct AuthCredential {
-    
-    var email: String
-    var password: String
-}
+import FirebaseFirestore
 
 class AuthService {
     
     static let shared = AuthService()
     
-    func signUp(credential: AuthCredential, completion: @escaping(Error?) -> Void) {
+    func signUp(email: String, pass: String, completion: @escaping(Error?) -> Void) {
         
-        Auth.auth().createUser(withEmail: credential.email, password: credential.password) { (result, error) in
+        if !Reachabilty.HasConnection() {
+            let error = CustomError.notConnection
+            completion(error)
+        }
+        Auth.auth().createUser(withEmail: email, password: pass) { (result, error) in
             
             if let error = error {
                 completion(error)
@@ -41,6 +38,10 @@ class AuthService {
     
     func resetPassword(email: String, completion: @escaping(_ error: Error?) -> Void) {
         
+        if !Reachabilty.HasConnection() {
+            let error = CustomError.notConnection
+            completion(error)
+        }
         Auth.auth().sendPasswordReset(withEmail: email) { (error) in
             
             if let error = error {
@@ -51,6 +52,10 @@ class AuthService {
     
     func resendValificationEmail(email: String, completion: @escaping(Error?) -> Void) {
         
+        if !Reachabilty.HasConnection() {
+            let error = CustomError.notConnection
+            completion(error)
+        }
         Auth.auth().currentUser?.reload(completion: { (error) in
             if let error = error {
                 completion(error)
@@ -66,7 +71,12 @@ class AuthService {
     
     func signOut(completion: @escaping(Error?) -> Void) {
         
+        if !Reachabilty.HasConnection() {
+            let error = CustomError.notConnection
+            completion(error)
+        }
         do{
+            UserDefaults.standard.removeObject(forKey: kUserLocalData)
             try Auth.auth().signOut()
             completion(nil)
             
@@ -76,9 +86,13 @@ class AuthService {
         }
     }
     
-    func login(credential: AuthCredential, completion: @escaping(Error?) -> Void) {
+    func login(email: String, pass: String, completion: @escaping(Error?) -> Void) {
         
-        Auth.auth().signIn(withEmail: credential.email, password: credential.password) { (result, error) in
+        if !Reachabilty.HasConnection() {
+            let error = CustomError.notConnection
+            completion(error)
+        }
+        Auth.auth().signIn(withEmail: email, password: pass) { (result, error) in
             
             if let error = error {
                 completion(error)
@@ -94,35 +108,37 @@ class AuthService {
     }
     
     static func currentnUid() -> String?{
+
         return Auth.auth().currentUser?.uid
-    }
-    
-    func fetchUser(uid:String, completion: @escaping(User) -> Void){
-        
-        KUSER_DB_REF.child(uid).observeSingleEvent(of: .value) { (snapShot) in
-            guard let dictionary = snapShot.value as? [String: Any] else { return }
-            let user = User(uid: uid, dictionary: dictionary)
-            completion(user)
-        }
     }
     
     func saveUser(user: User, completion: @escaping(Error?) -> Void) {
     
-        let values = [
-            "uid": user.id as String,
-            "email": user.email as String,
-            "userName": user.userName as String,
-            "icon": user.icon as Any,
-            "createdAt": user.createdAt as String,
-            "accountType": user.accountType.rawValue as Int
-        ] as [String: Any]
-        KUSER_DB_REF.child(user.id).updateChildValues(values) { (error, ref) in
+        if !Reachabilty.HasConnection() {
+            let error = CustomError.notConnection
+            completion(error)
+        }
+        FirebaseCollectionRef(.User).document(user.id).setData(userDictionaryFrom(user: user) as! [String : Any]) { (error) in
             if let error = error {
                 completion(error)
             }
             completion(nil)
         }
-        
     }
-
+    
+    func fetchUser(uid:String, completion: @escaping(_ error: Error?,_ user: User?) -> Void) {
+        
+        kUser_Reference.document(uid).getDocument { (snapShot, error) in
+            if let error = error {
+                completion(error, nil)
+            }
+            guard let snapShot = snapShot else { return }
+            if snapShot.exists {
+                let user = User(_dictionary: snapShot.data()! as NSDictionary)
+                completion(nil,user)
+            }else{
+                completion(nil, nil)
+            }
+        }
+    }
 }

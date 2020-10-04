@@ -10,7 +10,7 @@ import UIKit
 
 protocol SignUpControllerDelegate: class {
     
-    func sendUserCredential(credential: AuthCredential)
+    func sendUserCredential(email: String, pass: String)
 }
 
 class SignUpController: UIViewController {
@@ -37,7 +37,7 @@ class SignUpController: UIViewController {
         
         return label
     }()
-    // **UIButtonなので注意
+
     private let addImageButton: UIButton = {
         
         let iv = UIButton(type: .system)
@@ -218,37 +218,39 @@ class SignUpController: UIViewController {
     fileprivate func changeStateOnInput(sender: UITextField) {
         
         changeSignInButtonState()
-        if sender == emailInputView.tf {
+        
+        switch sender {
+        case emailInputView.tf:
             if sender.text!.count > 0 {
                self.emailInputView.underLine.backgroundColor = .systemBlue
             }else{
                self.emailInputView.underLine.backgroundColor = .darkGray
             }
-        }else if sender == passwordInputView.tf {
+        case passwordInputView.tf:
             if sender.text!.count > 6 {
                 self.passwordInputView.underLine.backgroundColor = .systemBlue
             }else{
                self.passwordInputView.underLine.backgroundColor = .darkGray
             }
-        }else if sender == userNameInputView.tf {
+        case userNameInputView.tf:
             if sender.text!.count > 0 {
                 self.userNameInputView.underLine.backgroundColor = .systemBlue
             }else{
                 self.userNameInputView.underLine.backgroundColor = .darkGray
             }
+        default:
+            return
         }
     }
     
     fileprivate func changeSignInButtonState() {
-        
-        let buttonEnable: Bool = emailInputView.tf.text!.count > 0 && passwordInputView.tf.text!.count > 6 && !userNameInputView.tf.text!.isEmpty
-        
-        if buttonEnable {
-            signUpButton.backgroundColor = #colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1)
+      
+        if emailInputView.tf.text!.count > 6 && passwordInputView.tf.text!.count > 6 && !userNameInputView.tf.text!.isEmpty {
+            signUpButton.backgroundColor = .systemGreen
             signUpButton.isEnabled = true
             signUpButton.setTitle("登録", for: .normal)
         }else{
-            signUpButton.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+            signUpButton.backgroundColor = .lightGray
             signUpButton.isEnabled = false
             signUpButton.setTitle("入力を完了してください", for: .normal)
         }
@@ -262,57 +264,64 @@ class SignUpController: UIViewController {
     
     fileprivate func signUpUser(){
         
-        self.signUpButton.isEnabled = false
-        self.showloader(true)
-        if !Reachabilty.HasConnection() {
-            self.messageAlert(title: "通信エラー", message: "通信状況を確認してください") { (_) in
-                self.signUpButton.isEnabled = true
-                self.showloader(false)
-            }
-        }
-        let credential = AuthCredential(email: emailInputView.tf.text!, password: passwordInputView.tf.text!)
-        AuthService.shared.signUp(credential: credential) { (error) in
-            
+        checkHasConnection()
+        changeButtonState(enable: false)
+        guard let email = emailInputView.tf.text else { return }
+        guard let pass = passwordInputView.tf.text else { return }
+        guard let name = userNameInputView.tf.text else { return }
+        
+        AuthService.shared.signUp(email: email, pass: pass) { (error) in
             if let error = error {
-                self.signUpButton.isEnabled = true
                 self.errorAlert(message: error.localizedDescription)
-                self.showloader(false)
-                return
+                self.changeButtonState(enable: true)
             }
             
             if self.userImage == nil {
                 self.userImage = UIImage(systemName: "person")
             }
             guard let uid = AuthService.currentnUid() else { return }
-            guard let userName = self.userNameInputView.tf.text else { return }
-            FireAPI.shared.uploadImage(image: self.userImage!, uid: uid) { (error, url) in
+            ImageLoader.uploadImages(pathType: .user, images: [self.userImage], uid: uid) { [self] (error, imageLinks) in
                 
                 if let error = error {
-                    self.showloader(false)
-                    self.signUpButton.isEnabled = true
                     self.errorAlert(message: error.localizedDescription)
+                    self.changeButtonState(enable: true)
                     return
                 }
-                let accountTypeIndex = self.userTypeSegment.selectedSegmentIndex
-                let user = User(id: uid, userName: userName, icon: url, email: credential.email, createdAt: getCurrentTime(), accountType: AccountType(rawValue: accountTypeIndex)!)
+                print("links",imageLinks)
+                guard let url = imageLinks.first else { return }
+                let user = User(id: uid, userName: name, icon: url, email: email, createdAt: getCurrentTime(), accountType: userTypeSegment.selectedSegmentIndex)
+                print("user",user)
                 AuthService.shared.saveUser(user: user) { (error) in
                     
                     if let error = error {
-                        self.showloader(false)
-                        self.signUpButton.isEnabled = true
                         self.errorAlert(message: error.localizedDescription)
+                        self.changeButtonState(enable: true)
                         return
                     }
-                    self.showloader(false)
-                    self.messageAlert(title: "登録完了", message: "送られてきたメールを確認してください。") { (_) in
-                        self.signUpButton.isEnabled = true
-                        self.delegate?.sendUserCredential(credential: credential)
+                    self.changeButtonState(enable: true)
+                    self.messageAlert(title: "登録完了", message: "送られてきたメールを書くんインしてください。") { (_) in
+                        
+                        self.delegate?.sendUserCredential(email: email, pass: pass)
                         self.dismiss(animated: true, completion: nil)
                     }
                 }
             }
+         
         }
     }
+    
+    fileprivate func changeButtonState(enable: Bool) {
+        
+        if enable {
+            self.signUpButton.isEnabled = true
+            self.showloader(false)
+        }else{
+            self.signUpButton.isEnabled = false
+            self.showloader(true)
+        }
+        
+    }
+
 }
 
 extension SignUpController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -339,7 +348,7 @@ extension SignUpController: UIImagePickerControllerDelegate, UINavigationControl
         addImageButton.setImage(image.withRenderingMode(.alwaysOriginal), for: .normal)
         addImageButton.layer.cornerRadius = 120/2
         addImageButton.layer.borderColor = UIColor.black.cgColor
-        addImageButton.layer.borderWidth = 1.2
+        addImageButton.layer.borderWidth = 0.4
         
         picker.dismiss(animated: true, completion: nil)
     }
